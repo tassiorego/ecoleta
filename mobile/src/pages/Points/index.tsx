@@ -5,24 +5,28 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  Image,
 } from 'react-native';
 import Constants from 'expo-constants';
 import { Feather as Icon } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { SvgUri } from 'react-native-svg';
 
 const Points: React.FC = () => {
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
 
-  function handleNavigationBack() {
+  function handleNavigationToBack() {
     goBack();
+  }
+  function handleNavigationToDetail() {
+    navigate('Detail');
   }
 
   return (
     <>
       <View style={styles.container}>
-        <TouchableOpacity onPress={handleNavigationBack}>
+        <TouchableOpacity onPress={handleNavigationToBack}>
           <Icon name="arrow-left" size={24} color="#34cb79" />
         </TouchableOpacity>
         <Text style={styles.title}> 😀 Bem vindo</Text>
@@ -30,7 +34,32 @@ const Points: React.FC = () => {
           Encontre no mapa um ponto de coleta.
         </Text>
         <View style={styles.mapContainer}>
-          <MapView style={styles.map} />
+          <MapView
+            style={styles.map}
+            initialRegion={{
+              latitude: -3.8687108,
+              longitude: -38.6005225,
+              latitudeDelta: 0.014,
+              longitudeDelta: 0.014,
+            }}
+          >
+            <Marker
+              onPress={handleNavigationToDetail}
+              style={styles.mapMarker}
+              coordinate={{ latitude: -3.8687108, longitude: -38.6005225 }}
+            >
+              <View style={styles.mapMarkerContainer}>
+                <Image
+                  style={styles.mapMarkerImage}
+                  source={{
+                    uri:
+                      'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60',
+                  }}
+                />
+                <Text style={styles.mapMarkerTitle}>Mercado</Text>
+              </View>
+            </Marker>
+          </MapView>
         </View>
       </View>
       <View style={styles.itemsContainer}>
