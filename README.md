@@ -12,7 +12,7 @@
 
 - [Sobre](#about)
 - [Tecnologias](#technology)
-- [Iniciando](#getting_started)
+- [Iniciando](#usage)
 - [Aprendizado](#learning)
 
 ## 🧐 Sobre <a name = "about"></a>
@@ -46,4 +46,4 @@ npm install
 
 ## 🎉 Aprendizado <a name = "learning"></a>
 
-- Meu principal aprendizado foi a usar o Expo, ele pode ser bem prático no desenvolvimento de pequenos projeto e com menor.
+- Meu principal aprendizado foi a usar o Expo, ele pode ser bem prático no desenvolvimento de pequenos projeto. Além de permitir explorar diversas bibliotecas com uma simples instalação. 
