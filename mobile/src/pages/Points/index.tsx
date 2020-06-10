@@ -22,6 +22,8 @@ interface Item {
 
 const Points: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
   const { goBack, navigate } = useNavigation();
 
   function handleNavigationToBack() {
@@ -29,6 +31,17 @@ const Points: React.FC = () => {
   }
   function handleNavigationToDetail() {
     navigate('Detail');
+  }
+
+  function handleSelectItem(id: number) {
+    const alreadySelected = selectedItems.includes(id);
+
+    if (alreadySelected) {
+      const filteredItems = selectedItems.filter((item) => item !== id);
+      setSelectedItems(filteredItems);
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
   }
 
   useEffect(() => {
@@ -85,8 +98,12 @@ const Points: React.FC = () => {
           {items.map((item) => (
             <TouchableOpacity
               key={String(item.id)}
-              style={styles.item}
-              onPress={() => {}}
+              style={[
+                styles.item,
+                selectedItems.includes(item.id) ? styles.selectedItem : {},
+              ]}
+              activeOpacity={0.6}
+              onPress={() => handleSelectItem(item.id)}
             >
               <SvgUri width={42} height={42} uri={item.image_url} />
               <Text style={styles.itemTitle}>{item.title}</Text>
