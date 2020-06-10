@@ -19,7 +19,7 @@ const Home: React.FC = () => {
   const { navigate } = useNavigation();
 
   function handleNavigateToPoints() {
-    navigate('Points');
+    navigate('Points', { uf, city });
   }
 
   return (
